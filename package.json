@@ -1,9 +1,9 @@
 {
-  "name": "xx",
+  "name": "scaffold-for-react",
   "description": "",
   "version": "0.0.1",
   "scripts": {
-    "start": "DEV=1 LIVELOAD=1 webpack-dev-server --config webpack.config.js --progress --open --hot --inline",
+    "start": "DEV=1 webpack-dev-server --config webpack.config.js --open --hot --inline",
     "build": "webpack --config webpack.config.js  --profile --progress"
   },
   "dependencies": {
@@ -29,6 +29,9 @@
     "babel-preset-react": "~6.5.0",
     "babel-preset-stage-0": "~6.5.0",
     "babel-preset-stage-1": "~6.5.0",
+    "eslint": "^3.8.1",
+    "eslint-loader": "^1.6.0",
+    "eslint-plugin-react": "^6.4.1",
     "extract-text-webpack-plugin": "~1.0.1",
     "fs-extra": "^0.30.0",
     "globby": "^4.1.0",

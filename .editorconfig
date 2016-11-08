@@ -1,17 +1,24 @@
-# http://editorconfig.org
+# http://editorconfig.org/
+# 子目录可放子级editorconfig
 root = true
 
 [*]
+charset = utf-8
 indent_style = space
 indent_size = 2
 end_of_line = lf
-charset = utf-8
-trim_trailing_whitespace = true
+# 避免一些无意义的diff
 insert_final_newline = true
+trim_trailing_whitespace = true
+max_line_length = 80
 
-[*.md]
+[*.{html,htm,vm,tpl}]
+indent_size = 2
+insert_final_newline = false
+
+[**.md]
+# 考虑markdown的特殊语法
+max_line_length = 0
 trim_trailing_whitespace = false
-
-[makefile]
-indent_style = tab
+insert_final_newline = false
 indent_size = 4

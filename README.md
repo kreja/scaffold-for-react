@@ -1,26 +1,27 @@
 # scaffold for react
 
+support:
 
-
-## todo
 - eslint
 
 
-### 开发调试
+
+## todo
+- hmr: automatically add `module.hot.accept`
+
+
+### development
 
 ```
 npm start
 ```
 
 
-### 打包
+### build
 
 ```
 npm run build
 ```
 
 
-## 升级日志
-
-### 0.0.1
-
+## ChangeLog
