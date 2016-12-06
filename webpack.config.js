@@ -55,7 +55,7 @@ var config = {
       loader: 'eslint-loader', 
       exclude: /node_modules/
     }],
-    loaders: [{ // todo::babel
+    loaders: [{
       test: /\.jsx?$/,
       exclude: /node_modules/,
       loader: 'babel',
@@ -67,9 +67,10 @@ var config = {
           'transform-object-assign',
           'transform-react-display-name',
           // 'transform-class-properties',
-          // IE9 不支持 super bug
-          // http://work.taobao.net/issues/50131
           'transform-es3-member-expression-literals', 
+          // https://github.com/babel/babelify/issues/133
+          // IE9 不支持 super，添加以下两个插件解决
+          // babel 编译时将spuer编译成Object.setPrototypeOf 而IE9不支持该方法，导致无法调用基类的构造函数。
           ['transform-es2015-classes', {
             loose: true
           }],
