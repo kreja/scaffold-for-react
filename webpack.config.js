@@ -12,24 +12,19 @@ var fs = require('fs-extra');
 
 var DEV = process.env.DEV;
 var cwd = process.cwd();
-var SINGLE_PAGE = process.env.SINGLE_PAGE;
-
-var entry = {};
 
 // get entry
-if (SINGLE_PAGE) { // 如果需要单个的start或者build
-  entry[`pages/${SINGLE_PAGE}/index`] = [`./src/pages/${SINGLE_PAGE}/index.js`];
-} else {
-  globby.sync(['**/pages/*'], {
-    cwd: cwd + '/src'
-  }).forEach(item => {
-    entry[item + '/index'] = [`./src/${item}/index.js`];
-  });
-}
+// globby.sync(['**/pages/*'], {
+//   cwd: cwd + '/src'
+// }).forEach(item => {
+//   entry[item + '/index'] = [`./src/${item}/index.js`];
+// });
 
 var config = {
   context: cwd,
-  entry: entry,
+  entry: {
+    'index': './src/index.js'
+  },
   output: {
     path: 'build',
     publicPath: '/build/', // 注意这里的斜杠，漏掉斜杠会导致 hmr full reload
@@ -40,10 +35,14 @@ var config = {
     extensions: ['', '.js', '.jsx'],
     // 有了下面这些 alias 就可以用绝对路径引用这些模块了
     alias: {
+      actions: path.join(__dirname, 'src/actions'),
       components: path.join(__dirname, 'src/components'),
+      constants: path.join(__dirname, 'src/constants'),
+      containers: path.join(__dirname, 'src/containers'),
+      reducers: path.join(__dirname, 'src/reducers'),
+      store: path.join(__dirname, 'src/store'),
       utils: path.join(__dirname, 'src/utils'),
-      styles: path.join(__dirname, 'src/styles'),
-      pages: path.join(__dirname, 'src/pages')
+      styles: path.join(__dirname, 'src/styles')
     }
   },
   eslint: {
@@ -80,7 +79,7 @@ var config = {
     }, {
       test: /\.js/,
       exclude: /node_modules/,
-      loaders: ['webpack-module-hot-accept'] // todo::入口文件没法加
+      loaders: ['webpack-module-hot-accept']
     }, {
       test: /\.scss/,
       exclude: /node_modules/,
@@ -95,17 +94,18 @@ var config = {
     'react': 'React',
     'react-dom': 'ReactDOM',
     'react/lib/ReactTransitionGroup': 'var window.React.addons.TransitionGroup',
-    'react/lib/ReactCSSTransitionGroup': 'var window.React.addons.CSSTransitionGroup'
-    // todo2::为什么加了下面这句，直接使用 Component 打包后包还是会增大呢？
-    // 'react/lib/ReactComponent': 'var window.React.Component'
+    'react/lib/ReactCSSTransitionGroup': 'var window.React.addons.CSSTransitionGroup',
+    'react-redux': 'ReactRedux',
+    'redux-thunk': 'var window.ReduxThunk.default',
+    'redux': 'Redux'
   },
   plugins: [
-    // todo2::
-    // new webpack.ProvidePlugin({
-    //     Component: 'react/lib/ReactComponent'
-    // }),
     new ExtractTextPlugin('[name].bundle.css', {
       allChunks: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: 'vendor',
+      minChunks: Infinity
     }),
     new webpack.NoErrorsPlugin(), // 允许错误不打断程序
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -147,7 +147,10 @@ if (!DEV) {
   globby([
     'node_modules/babel-polyfill/dist/*',
     'node_modules/react/dist/*',
-    'node_modules/react-dom/dist/*'
+    'node_modules/react-dom/dist/*',
+    'node_modules/react-redux/dist/*',
+    'node_modules/redux-thunk/dist/*',
+    'node_modules/redux/dist/*'
   ]).then(paths => {
     fs.mkdirsSync('build/lib/');
     paths.forEach((item) => {

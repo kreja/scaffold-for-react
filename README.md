@@ -1,4 +1,4 @@
-# scaffold for react
+# scaffold for react (with redux)
 
 support:
 
@@ -8,8 +8,7 @@ support:
 
 
 ## todo
-- hmr: automatically add `module.hot.accept`
-- some questions in webpack.config.js
+- perfect util ajax
 
 
 ### development
@@ -24,6 +23,3 @@ npm start
 ```
 npm run build
 ```
-
-
-## ChangeLog
