@@ -1,5 +1,7 @@
 # scaffold for react (with redux)
 
+No router, only one page.
+
 support:
 
 - eslint
