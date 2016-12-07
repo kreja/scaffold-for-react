@@ -78,10 +78,6 @@ var config = {
         ]
       }
     }, {
-      test: /\.js/,
-      exclude: /node_modules/,
-      loaders: ['webpack-module-hot-accept'] // todo::入口文件没法加
-    }, {
       test: /\.scss/,
       exclude: /node_modules/,
       loader: ExtractTextPlugin.extract('style', 'raw!postcss!sass-loader')
@@ -161,6 +157,11 @@ if (!DEV) {
     headers: { 'Access-Control-Allow-Origin': '*' },
     'Access-Control-Allow-Credentials': 'true'
   };
+  config.module.loaders.push({
+    test: /\.js/,
+    exclude: /node_modules/,
+    loaders: ['webpack-module-hot-accept'] // todo::入口文件没法加
+  });
   config.plugins.push(new webpack.SourceMapDevToolPlugin({}));
 }
 
