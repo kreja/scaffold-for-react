@@ -77,10 +77,6 @@ var config = {
         ]
       }
     }, {
-      test: /\.js/,
-      exclude: /node_modules/,
-      loaders: ['webpack-module-hot-accept']
-    }, {
       test: /\.scss/,
       exclude: /node_modules/,
       loader: ExtractTextPlugin.extract('style', 'raw!postcss!sass-loader')
@@ -97,7 +93,9 @@ var config = {
     'react/lib/ReactCSSTransitionGroup': 'var window.React.addons.CSSTransitionGroup',
     'react-redux': 'ReactRedux',
     'redux-thunk': 'var window.ReduxThunk.default',
-    'redux': 'Redux'
+    'redux': 'Redux',
+    'react-router': 'ReactRouter',
+    'react-router-redux': 'ReactRouterRedux'
   },
   plugins: [
     new ExtractTextPlugin('[name].bundle.css', {
@@ -127,8 +125,7 @@ var config = {
   ]
 };
 
-// production
-if (!DEV) {
+if (!DEV) { // production
   config.plugins.push(new webpack.optimize.DedupePlugin());
   config.plugins.push(new webpack.optimize.UglifyJsPlugin({
     compress: {
@@ -149,6 +146,8 @@ if (!DEV) {
     'node_modules/react/dist/*',
     'node_modules/react-dom/dist/*',
     'node_modules/react-redux/dist/*',
+    'node_modules/react-router/umd/*',
+    'node_modules/react-router-redux/dist/*',
     'node_modules/redux-thunk/dist/*',
     'node_modules/redux/dist/*'
   ]).then(paths => {
@@ -159,11 +158,16 @@ if (!DEV) {
       });
     });
   });
-} else {
+} else { // DEV
   config.devServer = {
     headers: { 'Access-Control-Allow-Origin': '*' },
     'Access-Control-Allow-Credentials': 'true'
   };
+  config.module.loaders.push({
+    test: /\.js/,
+    exclude: /node_modules/,
+    loaders: ['webpack-module-hot-accept']
+  });
   config.plugins.push(new webpack.SourceMapDevToolPlugin({}));
 }
 

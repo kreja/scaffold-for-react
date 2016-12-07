@@ -1,6 +1,4 @@
-# scaffold for react (with redux)
-
-No router, only one page.
+# scaffold for react (with redux and router)
 
 support:
 

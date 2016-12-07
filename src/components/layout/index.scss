@@ -1,0 +1,14 @@
+.c-layout{
+	.nav{
+		margin-left: 10px;
+	}
+	.nav.active{
+		color: #f00;
+	}
+
+	.content{
+		border: 2px solid #98ace7;
+		margin: 10px;
+		padding: 10px;
+	}
+}
