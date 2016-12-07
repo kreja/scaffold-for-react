@@ -13,13 +13,6 @@ var fs = require('fs-extra');
 var DEV = process.env.DEV;
 var cwd = process.cwd();
 
-// get entry
-// globby.sync(['**/pages/*'], {
-//   cwd: cwd + '/src'
-// }).forEach(item => {
-//   entry[item + '/index'] = [`./src/${item}/index.js`];
-// });
-
 var config = {
   context: cwd,
   entry: {
@@ -76,10 +69,6 @@ var config = {
           'transform-proto-to-assign'
         ]
       }
-    }, {
-      test: /\.js/,
-      exclude: /node_modules/,
-      loaders: ['webpack-module-hot-accept']
     }, {
       test: /\.scss/,
       exclude: /node_modules/,
@@ -164,6 +153,11 @@ if (!DEV) {
     headers: { 'Access-Control-Allow-Origin': '*' },
     'Access-Control-Allow-Credentials': 'true'
   };
+  config.module.loaders.push({
+    test: /\.js/,
+    exclude: /node_modules/,
+    loaders: ['webpack-module-hot-accept']
+  });
   config.plugins.push(new webpack.SourceMapDevToolPlugin({}));
 }
 
