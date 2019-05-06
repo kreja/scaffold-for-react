@@ -8,6 +8,7 @@ const rootDir = path.resolve(__dirname, '../');
 module.exports = {
   entry: {
     index: './src/pages/index/index.jsx',
+    redux: './src/pages/redux/index.jsx',
   },
   output: {
     filename: './[name].js',
@@ -44,6 +45,8 @@ module.exports = {
   externals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    redux: 'Redux',
+    'react-redux': 'ReactRedux'
   },
   resolve: {
     extensions: ['.js', '.jsx'],
