@@ -8,7 +8,7 @@ see branches
 - [] ajax
 - [] 多页面
 - [] 单页面
-- [] redux
+- [x] redux
 - [] mobx
 - [] happypack
 - [] UI 库

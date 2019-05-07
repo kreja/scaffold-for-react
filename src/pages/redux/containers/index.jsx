@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { addTodo } from '../actions';
+import { addTodo, fetchStepAndAdd } from '../actions';
 
 // 其实这可以提出到 UI 组件目录中
 class Index extends React.Component {
@@ -12,11 +12,18 @@ class Index extends React.Component {
     this.props.addTodo('test~');
   }
 
+  handleFetchStepAndAdd = () => {
+    this.props.fetchStepAndAdd().then(text => {
+      console.log(`added text: ${text}`)
+    });
+  }
+
   render() {
     const { todos } = this.props;
 
     return <div className="page-redux">
       <button onClick={this.handleAdd}>ADD</button>
+      <button onClick={this.handleFetchStepAndAdd}>fetch and add</button>
       {
         todos.map(item => <div key={item.id}>{item.text}</div>)
       }
@@ -29,7 +36,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  addTodo: text => dispatch(addTodo(text))
+  addTodo: text => dispatch(addTodo(text)),
+  fetchStepAndAdd: text => dispatch(fetchStepAndAdd(text)),
 });
 
 // 或者设为对象

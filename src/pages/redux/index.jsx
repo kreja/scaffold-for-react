@@ -2,18 +2,18 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import rootReducer from './reducers';
+import configureStore from './configureStore';
 
 import Index from './containers/Index';
 
 import './index.scss';
 
-
-const store = createStore(rootReducer);
-
+const initialState = {
+  todos: [{ id:'init', text:'init data' }]
+};
+const store = configureStore(initialState);
 ReactDOM.render(<Provider store={store}>
   <div>
     <Index />
