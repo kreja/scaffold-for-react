@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     index: './src/pages/index/index.jsx',
     redux: './src/pages/redux/index.jsx',
+    router: './src/pages/router/index.jsx',
   },
   output: {
     filename: './[name].js',
