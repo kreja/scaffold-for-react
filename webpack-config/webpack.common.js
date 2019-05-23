@@ -48,7 +48,8 @@ module.exports = {
     react: 'React',
     'react-dom': 'ReactDOM',
     redux: 'Redux',
-    'react-redux': 'ReactRedux'
+    'react-redux': 'ReactRedux',
+    'react-router-dom': 'ReactRouterDOM',
   },
   resolve: {
     extensions: ['.js', '.jsx'],
