@@ -6,6 +6,11 @@ import { Link } from 'react-router-dom'
 import './index.scss';
 
 class Index extends React.Component {
+  constructor(props){
+    super(props);
+
+    console.log('constructor page2')
+  }
   render() {
     console.log(this.props.match);
     

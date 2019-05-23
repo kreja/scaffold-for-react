@@ -7,7 +7,7 @@ see branches
 - [] 样式
 - [] ajax
 - [] 多页面
-- [x] 单页面
+- [x] 单页面 router
 - [x] redux
 - [] mobx
 - [] happypack
@@ -15,3 +15,4 @@ see branches
 - [] 压缩等优化
 - [] hmr
 - [] 改 components 不会刷新
+- [o] 按需加载

@@ -9,11 +9,12 @@ module.exports = {
   entry: {
     index: './src/pages/index/index.jsx',
     redux: './src/pages/redux/index.jsx',
-    router: './src/pages/router/index.jsx',
+    router: './src/pages/router/index.jsx'
   },
   output: {
-    filename: './[name].js',
-    publicPath: 'dist' // 输出到这个目录
+    filename: '[name].js',
+    chunkFilename: '[name].js', // 按需加载后的chunk名字。实现按需加载需要
+    publicPath: '/dist/', // 输出到这个目录   要加斜杠
   },
   module: {
     rules: [
