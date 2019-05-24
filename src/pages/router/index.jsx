@@ -2,6 +2,7 @@
 
 import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
+// 要用 hash 模式就用 HashRouter ，其他都不用改
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 // import Loadable from 'react-loadable';
 
